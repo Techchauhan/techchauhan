@@ -1,6 +1,8 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics, Analytics } from "firebase/analytics";
+import { getFirestore, Firestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage"; // Corrected import
 
 // Firebase configuration object
 const firebaseConfig = {
@@ -23,4 +25,8 @@ if (typeof window !== "undefined") {
   analytics = getAnalytics(app);
 }
 
-export { app, analytics };
+// Initialize Firestore and Storage
+const db: Firestore = getFirestore(app);
+const storage = getStorage(app); // Use getStorage to initialize Storage
+
+export { app, analytics, db, storage };

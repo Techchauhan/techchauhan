@@ -1,14 +1,13 @@
 'use client'
 import React, { useState } from 'react';
 import Sidebar from '../components/sidebar';
+import AddPost from "./features/AddPost/AddPost"
 
 function AllPosts() {
   return <div>All Posts Component</div>;
 }
 
-function AddPost() {
-  return <div>Add Post Component</div>;
-}
+ 
 
 function EditPost() {
   return <div>Edit Post Component</div>;
