@@ -2,8 +2,11 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faList, faPlus, faEdit, faFolderPlus } from '@fortawesome/free-solid-svg-icons';
 
+// Define a type for the tab names
+type TabName = 'All Posts' | 'Add Post' | 'Edit Post' | 'Add Category';
+
 type SidebarProps = {
-  setActiveTab: (tab: string) => void;
+  setActiveTab: (tab: TabName) => void; // Use the TabName type here
 };
 
 export default function Sidebar({ setActiveTab }: SidebarProps) {

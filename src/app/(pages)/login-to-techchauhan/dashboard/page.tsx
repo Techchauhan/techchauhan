@@ -1,26 +1,18 @@
-'use client'
+'use client';
 import React, { useState } from 'react';
 import Sidebar from '../components/sidebar';
-import AddPost from "./features/AddPost/AddPost"
+import AddPost from "./features/AddPost/page";
+import EditPost from './features/EditPost/page';
+import AddCategory from './features/Category/Category';
+import AllPosts from './features/AllPosts/index'; // Adjust the import according to your project
 
-function AllPosts() {
-  return <div>All Posts Component</div>;
-}
-
- 
-
-function EditPost() {
-  return <div>Edit Post Component</div>;
-}
-
-function AddCategory() {
-  return <div>Add Category Component</div>;
-}
+type TabName = 'All Posts' | 'Add Post' | 'Edit Post' | 'Add Category';
 
 export default function AdminDashboard() {
-  const [activeTab, setActiveTab] = useState<string>('All Posts');
+  const [activeTab, setActiveTab] = useState<TabName>('All Posts');
 
-  let ActiveComponent: React.ComponentType;
+  let ActiveComponent: React.ComponentType<any>;
+
   switch (activeTab) {
     case 'Add Post':
       ActiveComponent = AddPost;
@@ -31,6 +23,7 @@ export default function AdminDashboard() {
     case 'Add Category':
       ActiveComponent = AddCategory;
       break;
+    case 'All Posts':
     default:
       ActiveComponent = AllPosts;
   }
