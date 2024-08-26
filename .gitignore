@@ -36,4 +36,4 @@ yarn-error.log*
 next-env.d.ts
 
 #remove firebase config
-/src/Firebase
+/src/Firebase/firebaseConfig.ts
