@@ -1,8 +1,14 @@
 import { useState } from 'react';
 import Head from 'next/head';
+import dynamic from 'next/dynamic';
 import { handleImageUpload } from './ImageUpload';
-import QuillEditor from './QuillEditor';
 import PostForm from './PostForm';
+import { toast } from 'react-toastify';
+import { db } from '../../../../../../Firebase/firebaseConfig'; // Ensure correct import path
+import { collection, addDoc } from 'firebase/firestore'; // Ensure correct imports
+
+// Dynamically import the QuillEditor with SSR disabled
+const QuillEditor = dynamic(() => import('./QuillEditor'), { ssr: false });
 
 const AddPost = () => {
   const [title, setTitle] = useState<string>('');
@@ -14,49 +20,69 @@ const AddPost = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [postStatus, setPostStatus] = useState<string>('Draft');
   const [categories, setCategories] = useState<string[]>([]);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   const handleContentChange = (value: string) => {
     setContent(value);
   };
 
   const handleSubmit = async () => {
-    try {
-      const uploadedImageUrl = await handleImageUpload(imageFile, setImageUrl); // Use setImageUrl for URL update
+    if (!title || !content) {
+      toast.error('Title and content are required.');
+      return;
+    }
 
+    setIsSubmitting(true);
+
+    try {
+      // Handle image upload if an image file is provided
+      const uploadedImageUrl = imageFile ? await handleImageUpload(imageFile, setImageUrl) : imageUrl;
+
+      // Prepare post data to be saved in Firestore
       const postData = {
         title,
         tags,
         metaDescription,
         content,
-        imageUrl: uploadedImageUrl,
+        imageUrl: uploadedImageUrl || null,
         category: selectedCategory,
         status: postStatus,
+        createdAt: new Date(), // Optional: Adding timestamp
       };
 
-      const response = await fetch('/api/posts', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(postData),
-      });
+      // Debug check
+      console.log('Firestore instance:', db);
 
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
+      // Ensure `db` is correctly initialized and passed to `collection`
+      const postsCollection = collection(db, 'posts'); // Correctly reference the collection
+      console.log('Posts collection reference:', postsCollection);
 
-      const result = await response.json();
-      console.log('Post saved successfully:', result);
+      const docRef = await addDoc(postsCollection, postData);
+      console.log('Post saved successfully with ID:', docRef.id);
+      toast.success('Post saved successfully!');
+      
+      // Clear form fields after successful submission
+      setTitle('');
+      setTags('');
+      setMetaDescription('');
+      setContent('');
+      setImageFile(null);
+      setImageUrl(null);
+      setSelectedCategory('');
+      setPostStatus('Draft');
     } catch (error) {
+      toast.error(`Error saving post: ${(error as Error).message}`);
       console.error('Error saving post:', error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
     <div className="p-6 bg-white shadow-md rounded-md">
       <Head>
-        <title>{title || "Add New Post"}</title>
-        <meta name="description" content={metaDescription || "Add a new post to your blog."} />
+        <title>{title || 'Add New Post'}</title>
+        <meta name="description" content={metaDescription || 'Add a new post to your blog.'} />
       </Head>
 
       <h2 className="text-2xl font-bold mb-4">Add New Post</h2>
@@ -69,7 +95,7 @@ const AddPost = () => {
         metaDescription={metaDescription}
         setMetaDescription={setMetaDescription}
         imageFile={imageFile}
-        setImageFile={setImageFile} // This should be for handling image files
+        setImageFile={setImageFile}
         imageUrl={imageUrl}
         categories={categories}
         selectedCategory={selectedCategory}
@@ -83,9 +109,10 @@ const AddPost = () => {
 
       <button
         onClick={handleSubmit}
-        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+        disabled={isSubmitting}
+        className={`bg-blue-500 text-white px-4 py-2 rounded ${isSubmitting ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-600'}`}
       >
-        Save Post
+        {isSubmitting ? 'Saving...' : 'Save Post'}
       </button>
     </div>
   );
