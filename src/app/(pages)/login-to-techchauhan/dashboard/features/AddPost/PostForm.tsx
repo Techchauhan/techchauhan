@@ -14,13 +14,19 @@ type PostFormProps = {
   imageFile: File | null;
   setImageFile: (file: File | null) => void;
   imageUrl: string | null;
-  categories: string[];
+  categories: Category[];
   selectedCategory: string;
   setSelectedCategory: (category: string) => void;
   postStatus: string;
   setPostStatus: (status: string) => void;
   onSubmit: () => Promise<void>;
 };
+
+interface Category {
+  id: string;
+  name: string;
+  parentId?: string;
+}
 
 const PostForm: React.FC<PostFormProps> = ({
   title,
@@ -49,20 +55,15 @@ const PostForm: React.FC<PostFormProps> = ({
       let uploadedImageUrl: string | null = null;
 
       if (imageFile) {
-        // Pass a setter function that expects a URL
         uploadedImageUrl = await handleImageUpload(imageFile, (url) => {
-          // Update the URL state with the uploaded image URL
-          setImageFile(null); // Clear the file state if needed
+          setImageFile(null);
           if (url) {
-            // Optionally, do something with the URL (e.g., set it to state)
             console.log('Image URL:', url);
           }
         });
       }
 
-      // Call the onSubmit function
       await onSubmit();
-
     } catch (error) {
       setError('Failed to save the post. Please try again.');
     } finally {
@@ -157,15 +158,11 @@ const PostForm: React.FC<PostFormProps> = ({
                 className="border rounded w-full py-2 px-3 text-gray-700"
               >
                 <option value="">Select a category</option>
-                {categories.length > 0 ? (
-                  categories.map((category) => (
-                    <option key={category} value={category}>
-                      {category}
-                    </option>
-                  ))
-                ) : (
-                  <option value="">No categories available</option>
-                )}
+                {categories.map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
+                ))}
               </select>
             </div>
 

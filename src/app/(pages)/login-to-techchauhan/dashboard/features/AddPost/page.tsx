@@ -1,14 +1,16 @@
-import { useState } from 'react';
-import Head from 'next/head';
-import dynamic from 'next/dynamic';
-import { handleImageUpload } from './ImageUpload';
+import React, { useState, useEffect } from 'react';
+import { db } from '../../../../../../Firebase/firebaseConfig'; // Adjust the path as necessary
+import { collection, query, getDocs, addDoc } from 'firebase/firestore';
 import PostForm from './PostForm';
+import { handleImageUpload } from './ImageUpload';
 import { toast } from 'react-toastify';
-import { db } from '../../../../../../Firebase/firebaseConfig'; // Ensure correct import path
-import { collection, addDoc } from 'firebase/firestore'; // Ensure correct imports
+import QuillEditor from './QuillEditor'; // Import QuillEditor
 
-// Dynamically import the QuillEditor with SSR disabled
-const QuillEditor = dynamic(() => import('./QuillEditor'), { ssr: false });
+interface Category {
+  id: string;
+  name: string;
+  parentId?: string;
+}
 
 const AddPost = () => {
   const [title, setTitle] = useState<string>('');
@@ -19,13 +21,41 @@ const AddPost = () => {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [postStatus, setPostStatus] = useState<string>('Draft');
-  const [categories, setCategories] = useState<string[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [categoryOptions, setCategoryOptions] = useState<{ [key: string]: string[] }>({});
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
-  const handleContentChange = (value: string) => {
-    setContent(value);
-  };
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const q = query(collection(db, 'categories'));
+        const querySnapshot = await getDocs(q);
+        const fetchedCategories: Category[] = [];
+        const fetchedCategoryOptions: { [key: string]: string[] } = {};
 
+        querySnapshot.forEach((doc) => {
+          const data = doc.data() as Omit<Category, 'id'>; // Exclude 'id' to prevent duplication
+          const id = doc.id;
+          fetchedCategories.push({ id, ...data });
+
+          if (data.parentId) {
+            if (!fetchedCategoryOptions[data.parentId]) {
+              fetchedCategoryOptions[data.parentId] = [];
+            }
+            fetchedCategoryOptions[data.parentId].push(id);
+          }
+        });
+
+        setCategories(fetchedCategories);
+        setCategoryOptions(fetchedCategoryOptions);
+      } catch (error) {
+        toast.error(`Error fetching categories: ${(error as Error).message}`);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+  
   const handleSubmit = async () => {
     if (!title || !content) {
       toast.error('Title and content are required.');
@@ -35,10 +65,8 @@ const AddPost = () => {
     setIsSubmitting(true);
 
     try {
-      // Handle image upload if an image file is provided
       const uploadedImageUrl = imageFile ? await handleImageUpload(imageFile, setImageUrl) : imageUrl;
 
-      // Prepare post data to be saved in Firestore
       const postData = {
         title,
         tags,
@@ -47,20 +75,15 @@ const AddPost = () => {
         imageUrl: uploadedImageUrl || null,
         category: selectedCategory,
         status: postStatus,
-        createdAt: new Date(), // Optional: Adding timestamp
+        createdAt: new Date(),
       };
 
-      // Debug check
-      console.log('Firestore instance:', db);
-
       // Ensure `db` is correctly initialized and passed to `collection`
-      const postsCollection = collection(db, 'posts'); // Correctly reference the collection
-      console.log('Posts collection reference:', postsCollection);
-
+      const postsCollection = collection(db, 'posts');
       const docRef = await addDoc(postsCollection, postData);
       console.log('Post saved successfully with ID:', docRef.id);
       toast.success('Post saved successfully!');
-      
+
       // Clear form fields after successful submission
       setTitle('');
       setTags('');
@@ -80,11 +103,6 @@ const AddPost = () => {
 
   return (
     <div className="p-6 bg-white shadow-md rounded-md">
-      <Head>
-        <title>{title || 'Add New Post'}</title>
-        <meta name="description" content={metaDescription || 'Add a new post to your blog.'} />
-      </Head>
-
       <h2 className="text-2xl font-bold mb-4">Add New Post</h2>
 
       <PostForm
@@ -105,7 +123,7 @@ const AddPost = () => {
         onSubmit={handleSubmit}
       />
 
-      <QuillEditor content={content} onChange={handleContentChange} />
+      <QuillEditor content={content} onChange={setContent} />
 
       <button
         onClick={handleSubmit}
