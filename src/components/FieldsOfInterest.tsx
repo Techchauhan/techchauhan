@@ -1,6 +1,12 @@
 'use client'
 import { motion } from 'framer-motion';
 
+const cardVariants = {
+  initial: { opacity: 0, y: 50 },
+  animate: { opacity: 1, y: 0 },
+  hover: { scale: 1.05, boxShadow: '0 8px 16px rgba(0,0,0,0.3)', backgroundColor: '#f7fafc', y: -8, rotate: 1 }
+};
+
 const FieldsOfInterest: React.FC = () => (
   <section className="py-12">
     <motion.h2
@@ -11,34 +17,42 @@ const FieldsOfInterest: React.FC = () => (
     >
       Fields of Interest
     </motion.h2>
-    <div className="flex flex-wrap justify-center gap-8">
+    <div className="flex flex-wrap justify-center gap-8 ">
+      {/* First */}
       <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-        className="w-80 p-6 bg-white rounded-lg shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:bg-gray-100 hover:-translate-y-2 hover:rotate-1"
+        variants={cardVariants}
+        initial="initial"
+        animate="animate"
+        whileHover="hover"
+        className="w-80 p-6 cursor-pointer bg-white rounded-lg shadow-lg transform transition-transform duration-300"
       >
         <h3 className="text-xl text-black font-semibold mb-2">Web/App Development</h3>
         <p className='text-black'>
           For web development, I use Next.js, and for app development, I utilize Flutter.
         </p>
       </motion.div>
+
+      {/* Second */}
       <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.4 }}
-        className="w-80 p-6 bg-white rounded-lg shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:bg-gray-100 hover:-translate-y-2 hover:rotate-1"
+        variants={cardVariants}
+        initial="initial"
+        animate="animate"
+        whileHover="hover"
+        className="w-80 p-6 bg-white cursor-pointer rounded-lg shadow-lg transform transition-transform duration-300"
       >
         <h3 className="text-xl text-black font-semibold mb-2">DevOps</h3>
         <p className='text-black'>
           My journey in DevOps includes a strong focus on Linux.
         </p>
       </motion.div>
+
+      {/* Third */}
       <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.6 }}
-        className="w-80 p-6 bg-white rounded-lg shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:bg-gray-100 hover:-translate-y-2 hover:rotate-1"
+        variants={cardVariants}
+        initial="initial"
+        animate="animate"
+        whileHover="hover"
+        className="w-80 p-6 bg-white  cursor-pointer rounded-lg shadow-lg transform transition-transform duration-300"
       >
         <h3 className="text-xl text-black font-semibold mb-2">CEH</h3>
         <p className='text-black'>
