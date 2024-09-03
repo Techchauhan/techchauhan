@@ -13,7 +13,7 @@ const FieldsOfInterest: React.FC = () => (
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.8, type: 'spring', stiffness: 120 }}
-      className="text-2xl font-semibold text-center mb-6"
+      className="text-2xl font-semibold text-center mb-6 text-white"
     >
       Fields of Interest
     </motion.h2>
