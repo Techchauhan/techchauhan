@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import Sidebar from '../components/sidebar';
 import AddPost from "./features/AddPost/page";
-import EditPost from './features/EditPost/page';
+import EditPost from './features/edit-post/[id]/page';
 import AddCategory from './features/Category/Category';
 import AllPosts from './features/AllPosts/index'; // Adjust the import according to your project
 
