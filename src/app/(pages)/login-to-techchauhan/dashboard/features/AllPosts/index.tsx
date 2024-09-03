@@ -1,10 +1,9 @@
-'use client'; // This marks the component as a client component
-
+'use client';   
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation'; // Use 'next/navigation' for App Router in Next.js 13
 import { db } from '../../../../../../Firebase/firebaseConfig'; // Adjust the path as necessary
 import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton } from '@mui/material';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, Dialog, DialogActions, DialogContent, DialogTitle, Button } from '@mui/material';
 import { Edit, Delete, Visibility } from '@mui/icons-material';
 import { toast } from 'react-toastify';
 
@@ -22,6 +21,8 @@ interface Post {
 
 const AllPosts: React.FC = () => {
   const [posts, setPosts] = useState<Post[]>([]);
+  const [dialogOpen, setDialogOpen] = useState<boolean>(false);
+  const [postToDelete, setPostToDelete] = useState<string | null>(null);
   const router = useRouter(); // Use `useRouter` from 'next/navigation'
 
   useEffect(() => {
@@ -45,49 +46,84 @@ const AllPosts: React.FC = () => {
     router.push(`/login-to-techchauhan/dashboard/features/edit-post/${postId}`);
   };
 
-  const handleDelete = async (postId: string) => {
-    try {
-      await deleteDoc(doc(db, 'posts', postId));
-      setPosts(posts.filter((post) => post.id !== postId));
-      toast.success('Post deleted successfully.');
-    } catch (error) {
-      toast.error(`Error deleting post: ${(error as Error).message}`);
+  const handleView = (postId: string) => {
+    router.push(`/login-to-techchauhan/dashboard/features/view-post/${postId}`);
+  };
+
+  const handleDelete = async () => {
+    if (postToDelete) {
+      try {
+        await deleteDoc(doc(db, 'posts', postToDelete));
+        setPosts(posts.filter((post) => post.id !== postToDelete));
+        toast.success('Post deleted successfully.');
+      } catch (error) {
+        toast.error(`Error deleting post: ${(error as Error).message}`);
+      } finally {
+        setDialogOpen(false);
+        setPostToDelete(null);
+      }
     }
   };
 
-  const handleView = (postId: string) => {
-    router.push(`/view-post/${postId}`);
+  const openDeleteDialog = (postId: string) => {
+    setPostToDelete(postId);
+    setDialogOpen(true);
+  };
+
+  const closeDeleteDialog = () => {
+    setDialogOpen(false);
+    setPostToDelete(null);
   };
 
   return (
-    <TableContainer component={Paper}>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>Title</TableCell>
-            <TableCell>Actions</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {posts.map((post) => (
-            <TableRow key={post.id}>
-              <TableCell>{post.title}</TableCell>
-              <TableCell>
-                <IconButton onClick={() => handleEdit(post.id)}>
-                  <Edit />
-                </IconButton>
-                <IconButton onClick={() => handleDelete(post.id)}>
-                  <Delete />
-                </IconButton>
-                <IconButton onClick={() => handleView(post.id)}>
-                  <Visibility />
-                </IconButton>
-              </TableCell>
+    <>
+      <TableContainer component={Paper}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Title</TableCell>
+              <TableCell>Actions</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {posts.map((post) => (
+              <TableRow key={post.id}>
+                <TableCell>{post.title}</TableCell>
+                <TableCell>
+                  <IconButton onClick={() => handleEdit(post.id)}>
+                    <Edit />
+                  </IconButton>
+                  <IconButton onClick={() => openDeleteDialog(post.id)}>
+                    <Delete />
+                  </IconButton>
+                  <IconButton onClick={() => handleView(post.id)}>
+                    <Visibility />
+                  </IconButton>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+
+      <Dialog
+        open={dialogOpen}
+        onClose={closeDeleteDialog}
+      >
+        <DialogTitle>Confirm Deletion</DialogTitle>
+        <DialogContent>
+          Are you sure you want to delete this post?
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={closeDeleteDialog} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleDelete} color="secondary">
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
   );
 };
 
