@@ -6,7 +6,7 @@ import EditPost from './features/edit-post/[id]/page';
 import AddCategory from './features/Category/Category';
 import AllPosts from './features/AllPosts/index'; // Adjust the import according to your project
 
-type TabName = 'All Posts' | 'Add Post' | 'Edit Post' | 'Add Category';
+type TabName = 'All Posts' | 'Add Post' | 'Add Category';
 
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState<TabName>('All Posts');
@@ -17,8 +17,7 @@ export default function AdminDashboard() {
     case 'Add Post':
       ActiveComponent = AddPost;
       break;
-    case 'Edit Post':
-      ActiveComponent = EditPost;
+    
       break;
     case 'Add Category':
       ActiveComponent = AddCategory;

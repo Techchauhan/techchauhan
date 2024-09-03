@@ -8,10 +8,22 @@ import Quill from 'quill';
 Quill.register('modules/imageResize', ImageResize);
 
 const QuillEditor = ({ content, onChange }: { content: string; onChange: (value: string) => void }) => {
+
+  // Function to apply default image styling
+  const applyDefaultImageStyles = (html: string) => {
+    return html.replace(/<img(?![^>]*style=")([^>]+)>/g, '<img style="display: block; margin-left: auto; margin-right: auto;" $1>');
+  };
+
+  const handleChange = (value: string) => {
+    // Apply default image styles before passing to onChange
+    const styledContent = applyDefaultImageStyles(value);
+    onChange(styledContent);
+  };
+
   return (
     <ReactQuill
       value={content}
-      onChange={onChange}
+      onChange={handleChange}
       modules={QuillEditor.modules}
       formats={QuillEditor.formats}
       placeholder="Write something amazing..."
@@ -31,7 +43,10 @@ QuillEditor.modules = {
     [{ 'align': [] }],
     ['clean'] // removes formatting
   ],
-  imageResize: {}, // Include the image resize module
+  imageResize: {
+    // Configuration for image resizing if needed
+    modules: ['Resize', 'DisplaySize'],
+  },
 };
 
 QuillEditor.formats = [

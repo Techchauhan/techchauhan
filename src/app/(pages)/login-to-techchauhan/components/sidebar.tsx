@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faList, faPlus, faEdit, faFolderPlus } from '@fortawesome/free-solid-svg-icons';
 
 // Define a type for the tab names
-type TabName = 'All Posts' | 'Add Post' | 'Edit Post' | 'Add Category';
+type TabName = 'All Posts' | 'Add Post' | 'Add Category';
 
 type SidebarProps = {
   setActiveTab: (tab: TabName) => void; // Use the TabName type here
@@ -27,13 +27,7 @@ export default function Sidebar({ setActiveTab }: SidebarProps) {
           <FontAwesomeIcon icon={faPlus} className="text-lg" />
           <span className="hidden md:inline">Add Post</span>
         </li>
-        <li
-          onClick={() => setActiveTab('Edit Post')}
-          className="cursor-pointer hover:bg-gray-700 p-2 rounded flex items-center space-x-2"
-        >
-          <FontAwesomeIcon icon={faEdit} className="text-lg" />
-          <span className="hidden md:inline">Edit Post</span>
-        </li>
+       
         <li
           onClick={() => setActiveTab('Add Category')}
           className="cursor-pointer hover:bg-gray-700 p-2 rounded flex items-center space-x-2"

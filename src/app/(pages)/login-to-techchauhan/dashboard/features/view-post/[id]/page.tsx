@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { useEffect, useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { db } from '../../../../../../../Firebase/firebaseConfig'; // Adjust this import based on your directory structure
@@ -63,6 +63,15 @@ const ViewPost: React.FC = () => {
 
   return (
     <div className="p-6 bg-white shadow-md rounded-md">
+      <style jsx>{`
+        .ql-editor img {
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+          max-width: 100%;
+          height: auto;
+        }
+      `}</style>
       <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
       <div className="text-gray-600 mb-4">
         <p><strong>Tags:</strong> {post.tags}</p>
