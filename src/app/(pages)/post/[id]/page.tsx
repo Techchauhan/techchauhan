@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { db } from '../../../../Firebase/firebaseConfig';
-import { doc, getDoc, collection, query, orderBy, limit, getDocs } from 'firebase/firestore';
+import { doc, getDoc, collection, query, orderBy, limit, getDocs, Timestamp } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -15,7 +15,7 @@ interface Post {
   content: string;
   imageUrl: string | null;
   category: string;
-  createdAt: any;
+  createdAt: Timestamp; // Use Timestamp from Firestore
 }
 
 const ViewPost: React.FC = () => {
@@ -87,7 +87,7 @@ const ViewPost: React.FC = () => {
       <style jsx>{`
         .ql-editor img {
           display: block;
-          align-item: center
+          align-items: center; /* Fix the typo here */
           margin-left: auto;
           margin-right: auto;
           max-width: 100%;
