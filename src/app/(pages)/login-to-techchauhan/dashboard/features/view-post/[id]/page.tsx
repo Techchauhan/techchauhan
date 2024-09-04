@@ -13,14 +13,12 @@ interface Post {
   content: string;
   imageUrl: string | null;
   category: string;
-  status: string;
   createdAt: any;
 }
 
 const ViewPost: React.FC = () => {
   const [post, setPost] = useState<Post | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
   const params = useParams();
   const postId = params?.id as string;
@@ -62,7 +60,7 @@ const ViewPost: React.FC = () => {
   }
 
   return (
-    <div className="p-6 bg-white shadow-md rounded-md">
+    <div className="px-4 lg:px-20 py-6 bg-white shadow-md rounded-md">
       <style jsx>{`
         .ql-editor img {
           display: block;
@@ -72,21 +70,40 @@ const ViewPost: React.FC = () => {
           height: auto;
         }
       `}</style>
-      <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
-      <div className="text-gray-600 mb-4">
-        <p><strong>Tags:</strong> {post.tags}</p>
-        <p><strong>Category:</strong> {post.category}</p>
-        <p><strong>Status:</strong> {post.status}</p>
-        <p><strong>Meta Description:</strong> {post.metaDescription}</p>
-      </div>
       {post.imageUrl && (
-        <div className="mb-4">
-          <img src={post.imageUrl} alt={post.title} className="w-full h-auto rounded-md" />
+        <div className="mb-6 flex justify-center">
+          <img
+            src={post.imageUrl}
+            alt={post.title}
+            className="max-w-md max-h-80 object-cover rounded-md shadow-lg"
+          />
         </div>
       )}
+      <h1 className="text-4xl font-extrabold mb-6 text-center text-gray-900 tracking-tight leading-tight lg:text-5xl">
+        {post.title}
+      </h1>
+      <div className="text-gray-600 mb-4">
+        <div className="mb-4 bg-gray-100 p-3 rounded-md shadow">
+          <span className="inline-block bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">
+            {post.category}
+          </span>
+        </div>
+        <div className="text-black" dangerouslySetInnerHTML={{ __html: post.metaDescription }} />
+      </div>
       <div className="mb-4">
-        <h2 className="text-xl font-semibold mb-2 text-black">Content</h2>
-        <div className='text-black' dangerouslySetInnerHTML={{ __html: post.content }} />
+        <div className="text-black" dangerouslySetInnerHTML={{ __html: post.content }} />
+      </div>
+      <div className="mt-6">
+        <div className="flex flex-wrap gap-2">
+          {post.tags.split(',').map((tag, index) => (
+            <span
+              key={index}
+              className="inline-block bg-green-100 text-green-800 text-sm font-medium px-2.5 py-0.5 rounded"
+            >
+              {tag.trim()}
+            </span>
+          ))}
+        </div>
       </div>
     </div>
   );
