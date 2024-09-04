@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { useState, useEffect } from 'react';
 import { db } from '../../../../../../Firebase/firebaseConfig'; // Adjust the path as necessary
 import { collection, query, getDocs, addDoc } from 'firebase/firestore';
@@ -56,7 +56,7 @@ const AddPost = () => {
 
     fetchCategories();
   }, []);
-  
+
   const handleSubmit = async () => {
     if (!title || !content) {
       toast.error('Title and content are required.');
@@ -79,7 +79,6 @@ const AddPost = () => {
         createdAt: new Date(),
       };
 
-      // Ensure `db` is correctly initialized and passed to `collection`
       const postsCollection = collection(db, 'posts');
       const docRef = await addDoc(postsCollection, postData);
       console.log('Post saved successfully with ID:', docRef.id);
