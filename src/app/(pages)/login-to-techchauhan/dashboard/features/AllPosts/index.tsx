@@ -1,9 +1,25 @@
-'use client';   
+'use client';
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation'; // Use 'next/navigation' for App Router in Next.js 13
 import { db } from '../../../../../../Firebase/firebaseConfig'; // Adjust the path as necessary
 import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, Dialog, DialogActions, DialogContent, DialogTitle, Button } from '@mui/material';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  IconButton,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Button,
+  CircularProgress,
+  Box,
+} from '@mui/material';
 import { Edit, Delete, Visibility } from '@mui/icons-material';
 import { toast } from 'react-toastify';
 
@@ -21,6 +37,7 @@ interface Post {
 
 const AllPosts: React.FC = () => {
   const [posts, setPosts] = useState<Post[]>([]);
+  const [loading, setLoading] = useState<boolean>(true); // Loading state to control spinner
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
   const [postToDelete, setPostToDelete] = useState<string | null>(null);
   const router = useRouter(); // Use `useRouter` from 'next/navigation'
@@ -36,6 +53,8 @@ const AllPosts: React.FC = () => {
         setPosts(fetchedPosts);
       } catch (error) {
         toast.error(`Error fetching posts: ${(error as Error).message}`);
+      } finally {
+        setLoading(false); // Stop loading when fetch is complete
       }
     };
 
@@ -77,39 +96,42 @@ const AllPosts: React.FC = () => {
 
   return (
     <>
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Title</TableCell>
-              <TableCell>Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {posts.map((post) => (
-              <TableRow key={post.id}>
-                <TableCell>{post.title}</TableCell>
-                <TableCell>
-                  <IconButton onClick={() => handleEdit(post.id)}>
-                    <Edit />
-                  </IconButton>
-                  <IconButton onClick={() => openDeleteDialog(post.id)}>
-                    <Delete />
-                  </IconButton>
-                  <IconButton onClick={() => handleView(post.id)}>
-                    <Visibility />
-                  </IconButton>
-                </TableCell>
+      {loading ? ( // Display the CircularProgress when loading
+        <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
+          <CircularProgress />
+        </Box>
+      ) : (
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Title</TableCell>
+                <TableCell>Actions</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableHead>
+            <TableBody>
+              {posts.map((post) => (
+                <TableRow key={post.id}>
+                  <TableCell>{post.title}</TableCell>
+                  <TableCell>
+                    <IconButton onClick={() => handleEdit(post.id)}>
+                      <Edit />
+                    </IconButton>
+                    <IconButton onClick={() => openDeleteDialog(post.id)}>
+                      <Delete />
+                    </IconButton>
+                    <IconButton onClick={() => handleView(post.id)}>
+                      <Visibility />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
 
-      <Dialog
-        open={dialogOpen}
-        onClose={closeDeleteDialog}
-      >
+      <Dialog open={dialogOpen} onClose={closeDeleteDialog}>
         <DialogTitle>Confirm Deletion</DialogTitle>
         <DialogContent>
           Are you sure you want to delete this post?

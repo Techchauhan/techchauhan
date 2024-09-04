@@ -1,31 +1,90 @@
-'use client'
-import { motion } from 'framer-motion';
+'use client';
+import React, { useEffect, useState } from 'react';
+import Link from 'next/link'; // Import Link
+import { db } from '../Firebase/firebaseConfig'; // Adjust the path as necessary
+import { collection, query, orderBy, limit, getDocs, Timestamp } from 'firebase/firestore';
+import { toast } from 'react-toastify';
 
-const RecentPosts: React.FC = () => (
-  <section className="py-12 bg-gray-100">
-    <motion.h2
-      initial={{ opacity: 0, x: -50 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.8 }}
-      className="text-2xl font-semibold text-center mb-6"
-    >
-      Recent Posts
-    </motion.h2>
-    <div className="flex flex-wrap justify-center gap-8">
-      <div className="w-80 p-6 bg-white rounded-lg shadow-lg">
-        <h3 className="text-xl font-semibold mb-2">Post 1</h3>
-        <p>A brief summary of the first post.</p>
+interface Post {
+  id: string;
+  title: string;
+  tags: string;
+  metaDescription: string;
+  content: string;
+  imageUrl: string | null;
+  category: string;
+  createdAt: Timestamp; // Use Timestamp from Firestore
+}
+
+const RecentPosts: React.FC = () => {
+  const [recentPosts, setRecentPosts] = useState<Post[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchRecentPosts = async () => {
+      try {
+        const postsRef = collection(db, 'posts');
+        const recentPostsQuery = query(postsRef, orderBy('createdAt', 'desc'), limit(5)); // Fetch more posts
+        const querySnapshot = await getDocs(recentPostsQuery);
+        const posts: Post[] = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data() as Omit<Post, 'id'>
+        }));
+
+        setRecentPosts(posts);
+      } catch (error) {
+        const errorMsg = `Error fetching recent posts: ${(error as Error).message}`;
+        setError(errorMsg);
+        toast.error(errorMsg);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchRecentPosts();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <section className="py-12 bg-gray-100 text-center">
+        <h2 className="text-2xl font-semibold mb-6">Recent Posts</h2>
+        <div>Loading...</div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="py-12 bg-gray-100 text-center">
+        <h2 className="text-2xl font-semibold mb-6">Recent Posts</h2>
+        <div className="text-red-600">{error}</div>
+      </section>
+    );
+  }
+
+  return (
+    <section className="py-12 bg-gray-100">
+      <h2 className="text-2xl font-semibold text-center mb-6">Recent Posts</h2>
+      <div className="flex flex-wrap gap-8 justify-center">
+        {recentPosts.map((post) => (
+          <Link href={`/post/${post.id}`} key={post.id}>
+            <div className="w-80 p-6 bg-white rounded-lg shadow-lg cursor-pointer hover:scale-105 transition-transform duration-300">
+              {post.imageUrl && (
+                <img
+                  src={post.imageUrl}
+                  alt={post.title}
+                  className="h-32 w-full object-cover rounded-md mb-2"
+                />
+              )}
+              <h3 className="text-xl font-semibold mb-2">{post.title}</h3>
+              <p className="text-sm text-gray-600">{post.metaDescription}</p>
+            </div>
+          </Link>
+        ))}
       </div>
-      <div className="w-80 p-6 bg-white rounded-lg shadow-lg">
-        <h3 className="text-xl font-semibold mb-2">Post 2</h3>
-        <p>A brief summary of the second post.</p>
-      </div>
-      <div className="w-80 p-6 bg-white rounded-lg shadow-lg">
-        <h3 className="text-xl font-semibold mb-2">Post 3</h3>
-        <p>A brief summary of the third post.</p>
-      </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default RecentPosts;

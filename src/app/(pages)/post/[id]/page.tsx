@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
-import { db } from '../../../../../../../Firebase/firebaseConfig';
+import { db } from '../../../../Firebase/firebaseConfig';
 import { doc, getDoc, collection, query, orderBy, limit, getDocs } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 import Box from '@mui/material/Box';
