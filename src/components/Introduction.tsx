@@ -3,8 +3,9 @@
 import Avatar from './Avatar';
 import { motion } from 'framer-motion';
 import HyperText from './magicui/hyper-text';
-import SparklesText from './magicui/sparkles-text';
+import dynamic from 'next/dynamic';
 
+const SparklesText = dynamic(() => import('./magicui/sparkles-text'), { ssr: false });
 const Introduction: React.FC = () => (
   <section className="relative text-center py-12 bg-gradient-to-r overflow-hidden">
     {/* Background Animation */}
