@@ -2,10 +2,12 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../../../../../../Firebase/firebaseConfig'; // Adjust the path as necessary
 import { collection, query, getDocs, addDoc } from 'firebase/firestore';
-import PostForm from './PostForm';
 import { handleImageUpload } from './ImageUpload';
 import { toast } from 'react-toastify';
-import QuillEditor from './QuillEditor'; // Import QuillEditor
+import dynamic from 'next/dynamic';
+
+const PostForm = dynamic(() => import('./PostForm'), { ssr: false });
+const QuillEditor = dynamic(() => import('./QuillEditor'), { ssr: false });
 
 interface Category {
   id: string;
