@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { db } from '../../../../../../Firebase/firebaseConfig'; // Adjust the path as necessary
-import { collection, query, getDocs, addDoc } from 'firebase/firestore';
+import { collection, query, getDocs, setDoc, doc } from 'firebase/firestore';
 import { handleImageUpload } from './ImageUpload';
 import { toast } from 'react-toastify';
 import dynamic from 'next/dynamic';
@@ -59,6 +59,15 @@ const AddPost = () => {
     fetchCategories();
   }, []);
 
+  // Function to create a slug from the title
+  const createSlug = (title: string): string => {
+    return title
+      .toLowerCase() // Convert to lowercase
+      .trim() // Remove leading/trailing whitespace
+      .replace(/[^a-z0-9]+/g, '-') // Replace non-alphanumeric characters with hyphens
+      .replace(/^-+|-+$/g, ''); // Remove leading/trailing hyphens
+  };
+
   const handleSubmit = async () => {
     if (!title || !content) {
       toast.error('Title and content are required.');
@@ -70,6 +79,8 @@ const AddPost = () => {
     try {
       const uploadedImageUrl = imageFile ? await handleImageUpload(imageFile, setImageUrl) : imageUrl;
 
+      const slug = createSlug(title); // Generate slug from the title
+
       const postData = {
         title,
         tags,
@@ -78,12 +89,14 @@ const AddPost = () => {
         imageUrl: uploadedImageUrl || null,
         category: selectedCategory,
         status: postStatus,
+        uid: slug, // Use the generated slug as the uid
         createdAt: new Date(),
       };
 
-      const postsCollection = collection(db, 'posts');
-      const docRef = await addDoc(postsCollection, postData);
-      console.log('Post saved successfully with ID:', docRef.id);
+      // Use setDoc instead of addDoc to specify the document ID as the slug
+      const postDocRef = doc(db, 'posts', slug);
+      await setDoc(postDocRef, postData);
+      console.log('Post saved successfully with slug:', slug);
       toast.success('Post saved successfully!');
 
       // Clear form fields after successful submission
