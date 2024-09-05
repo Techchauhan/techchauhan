@@ -1,4 +1,4 @@
-'use client';
+'use client'
 import React, { useEffect, useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { db } from '../../../../Firebase/firebaseConfig';
@@ -6,6 +6,7 @@ import { doc, getDoc, collection, query, orderBy, limit, getDocs, Timestamp } fr
 import { toast } from 'react-toastify';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
+import { format } from 'date-fns';
 
 interface Post {
   id: string;
@@ -39,6 +40,7 @@ const ViewPost: React.FC = () => {
           setPost({
             id: docSnap.id,
             ...postData,
+            createdAt: docSnap.data().createdAt, // No need to convert to Date here
           });
           console.log('Post content:', postData.content);
         } else {
@@ -84,74 +86,73 @@ const ViewPost: React.FC = () => {
 
   return (
     <div className="px-4 lg:px-20 py-6 bg-white shadow-md rounded-md">
-     <style jsx global>{`
-  .ql-editor img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 100%;
-    height: auto;
-  }
-  .ql-editor code {
-    background-color: #282c34; /* Background color for code blocks */
-    color: #ffffff; /* White text color for code */
-    padding: 8px; /* Padding for code */
-    border-radius: 5px; /* Rounded corners for code */
-    font-family: 'Courier New', Courier, monospace; /* Font style */
-    display: block; /* Makes each code block a block element */
-    overflow-x: auto; /* Adds a scrollbar for long code blocks */
-    white-space: pre-wrap; /* Preserves whitespace and line breaks */
-    word-wrap: break-word; /* Allows long words to break */
-    margin: 16px 0; /* Margin around the code block */
-  }
-  .ql-editor pre {
-    background-color: #282c34; /* Background color for <pre> elements */
-    color: #ffffff; /* White text color for <pre> */
-    padding: 12px; /* Padding for <pre> elements */
-    border-radius: 5px; /* Rounded corners */
-    overflow-x: auto; /* Horizontal scroll for overflowing content */
-    margin: 16px 0; /* Margin around the <pre> element */
-  }
-  .ql-editor h1 {
-    font-size: 2.5em;
-    font-weight: bold;
-    margin-top: 20px;
-    margin-bottom: 10px;
-  }
-  .ql-editor h2 {
-    font-size: 2em;
-    font-weight: bold;
-    margin-top: 15px;
-    margin-bottom: 8px;
-  }
-  .ql-editor p {
-    margin-bottom: 1em; /* Adds spacing between paragraphs */
-  }
-  .recent-posts-scrollable {
-    max-height: 700px;
-    overflow-y: auto;
-  }
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .px-4 {
-      padding-left: 10px;
-      padding-right: 10px;
-    }
-    .lg\\:px-20 {
-      padding-left: 10px;
-      padding-right: 10px;
-    }
-    .lg\\:text-5xl {
-      font-size: 2.5rem; /* Adjusted heading size for smaller screens */
-    }
-    .ql-editor h1 {
-      font-size: 2rem; /* Adjusted heading size */
-    }
-    .ql-editor h2 {
-      font-size: 1.5rem;
-    }
-  }
-`}</style>
+      <style jsx global>{`
+        .ql-editor img {
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+          max-width: 100%;
+          height: auto;
+        }
+        .ql-editor code {
+          background-color: #282c34;
+          color: #ffffff;
+          padding: 8px;
+          border-radius: 5px;
+          font-family: 'Courier New', Courier, monospace;
+          display: block;
+          overflow-x: auto;
+          white-space: pre-wrap;
+          word-wrap: break-word;
+          margin: 16px 0;
+        }
+        .ql-editor pre {
+          background-color: #282c34;
+          color: #ffffff;
+          padding: 12px;
+          border-radius: 5px;
+          overflow-x: auto;
+          margin: 16px 0;
+        }
+        .ql-editor h1 {
+          font-size: 2.5em;
+          font-weight: bold;
+          margin-top: 20px;
+          margin-bottom: 10px;
+        }
+        .ql-editor h2 {
+          font-size: 2em;
+          font-weight: bold;
+          margin-top: 15px;
+          margin-bottom: 8px;
+        }
+        .ql-editor p {
+          margin-bottom: 1em;
+        }
+        .recent-posts-scrollable {
+          max-height: 700px;
+          overflow-y: auto;
+        }
+        @media (max-width: 768px) {
+          .px-4 {
+            padding-left: 10px;
+            padding-right: 10px;
+          }
+          .lg\\:px-20 {
+            padding-left: 10px;
+            padding-right: 10px;
+          }
+          .lg\\:text-5xl {
+            font-size: 2.5rem;
+          }
+          .ql-editor h1 {
+            font-size: 2rem;
+          }
+          .ql-editor h2 {
+            font-size: 1.5rem;
+          }
+        }
+      `}</style>
 
       {post.imageUrl && (
         <div className="mb-6 flex justify-center">
@@ -166,9 +167,12 @@ const ViewPost: React.FC = () => {
         {post.title}
       </h1>
       <div className="text-gray-600 mb-4">
-        <div className="mb-4 bg-gray-100 p-3 rounded-md shadow">
+        <div className="mb-4 bg-gray-100 p-3 rounded-md shadow flex items-center justify-between">
           <span className="inline-block bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">
             {post.category}
+          </span>
+          <span className="text-gray-500 text-sm">
+            {format(post.createdAt.toDate(), 'MMM dd, yyyy')}
           </span>
         </div>
         <div className="text-black text-lg" dangerouslySetInnerHTML={{ __html: post.metaDescription }} />
