@@ -15,7 +15,7 @@ const Avatar: React.FC = () => (
       transition={{ type: 'spring', stiffness: 300 }}
     >
       <Image
-        src="/your-picture.jpg"  // Replace with your picture
+        src="/me.png"  // Replace with your picture
         alt="Your Name"
         layout="fill"
         objectFit="cover"
