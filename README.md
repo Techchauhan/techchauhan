@@ -1,55 +1,49 @@
-# Hi there! 👋 I'm [Your Name]!
+# Hi there! 👋 I'm Rishab Chauhan!
 
-Welcome to my GitHub profile! I'm a passionate developer, tech enthusiast, and lifelong learner. I love creating awesome projects, exploring new technologies, and sharing knowledge with the community.
+I'm an **Advanced Developer** with a passion for web and mobile technologies. I specialize in creating dynamic front-end interfaces and robust back-end solutions. Currently, I'm diving into the world of **DevOps** to enhance automation and deployment efficiency. 
+
+![Profile views](https://komarev.com/ghpvc/?username=techchauhan&color=blue)
 
 ## 🚀 About Me
 
-- 🔭 I’m currently working on **[Your Project Name](https://github.com/yourusername/yourproject)**
-- 🌱 I’m learning **JavaScript**, **Node.js**, and **Machine Learning**
-- 💬 Ask me about **JavaScript**, **React**, or anything tech-related!
-- 📫 Reach me at [your.email@example.com](mailto:your.email@example.com)
-- ⚡ Fun fact: I love solving puzzles and coding challenges!
+- 🌱 I’m currently learning **DevOps** to improve CI/CD pipelines and cloud deployments.
+- 🔭 I’m working on several projects including an **E-Learning Website** and **College Management System**.
+- 💬 Ask me about **JavaScript**, **React**, **Flutter**, or anything tech-related!
+- 📫 Reach me at [rishabchauhankumar@gmail.com](mailto:rishabchauhankumar@gmail.com)
+- ⚡ Fun fact: I love participating in hackathons and tech challenges!
 
-## 🛠️ Tech Stack
+## 🛠️ Technologies & Tools
 
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=white&style=for-the-badge)
-![Node.js](https://img.shields.io/badge/Node.js-43853D?logo=node.js&logoColor=white&style=for-the-badge)
-![React](https://img.shields.io/badge/React-20232A?logo=react&logoColor=61DAFB&style=for-the-badge)
-![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white&style=for-the-badge)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white&style=for-the-badge)
+- **Frontend:** ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=white&style=for-the-badge) ![React](https://img.shields.io/badge/React-20232A?logo=react&logoColor=61DAFB&style=for-the-badge) ![Next.js](https://img.shields.io/badge/Next.js-000000?logo=next.js&logoColor=white&style=for-the-badge)
+- **Backend:** ![Node.js](https://img.shields.io/badge/Node.js-43853D?logo=node.js&logoColor=white&style=for-the-badge) ![PHP](https://img.shields.io/badge/PHP-777BB4?logo=php&logoColor=white&style=for-the-badge)
+- **Mobile Development:** ![Flutter](https://img.shields.io/badge/Flutter-02569B?logo=flutter&logoColor=white&style=for-the-badge) ![Dart](https://img.shields.io/badge/Dart-0175C2?logo=dart&logoColor=white&style=for-the-badge)
+- **Database:** ![Firebase](https://img.shields.io/badge/Firebase-FFCA28?logo=firebase&logoColor=white&style=for-the-badge) ![MySQL](https://img.shields.io/badge/MySQL-4479A1?logo=mysql&logoColor=white&style=for-the-badge) ![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?logo=mongodb&logoColor=white&style=for-the-badge)
+- **DevOps Tools:** ![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white&style=for-the-badge) ![GitHub](https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white&style=for-the-badge)
+- **Cloud:** ![AWS](https://img.shields.io/badge/AWS-232F3E?logo=amazon-aws&logoColor=white&style=for-the-badge) ![Google Cloud](https://img.shields.io/badge/Google_Cloud-4285F4?logo=google-cloud&logoColor=white&style=for-the-badge)
 
 ## 📈 GitHub Stats
 
-![Your Name's GitHub stats](https://github-readme-stats.vercel.app/api?username=yourusername&show_icons=true&theme=radical)
+![Rishab's GitHub stats](https://github-readme-stats.vercel.app/api?username=techchauhan&show_icons=true&theme=radical)
 
-## 🌟 Top Repositories
+## 🌟 Projects
 
-[![ReadMe Card](https://github-readme-stats.vercel.app/api/pin/?username=yourusername&repo=yourrepo&theme=radical)](https://github.com/yourusername/yourrepo)
-
-## ✨ Fun Section
-
-- 🧩 I enjoy solving coding puzzles and participating in hackathons.
-- 🎨 I also love creating digital art and experimenting with graphic design.
-- 📚 When I'm not coding, you can find me reading science fiction novels or playing chess.
-
-## 🤝 Connect with Me
-
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-blue?logo=linkedin&logoColor=white&style=for-the-badge)](https://linkedin.com/in/yourlinkedin)
-[![Twitter](https://img.shields.io/badge/Twitter-1DA1F2?logo=twitter&logoColor=white&style=for-the-badge)](https://twitter.com/yourtwitter)
+- **[E-Learning Website](https://learning.pulsezest.com/):** Built with **Next.js** and **Firebase**, allowing teachers to publish courses and students to learn interactively.
+- **[Ecommerce Android App](https://github.com/techchauhan):** Developed with **Flutter** and **PHP**, featuring cart functionality and Razorpay integration.
+- **[College Management System](https://github.com/techchauhan):** Android application and web portal integrated for managing student admissions and coursework.
 
 ## 🏆 Achievements
 
-- 🥇 Won the **Best Developer Award** at [Hackathon Name].
-- 🌍 Open-sourced multiple projects used by developers worldwide.
-- 📝 Wrote articles for [Medium](https://medium.com/@yourusername) on tech and programming topics.
+- 🎖️ **2nd Prize** at Science Exhibition - Radar Making using UNO
+- 🏆 **Java Excellence Certificate** from Coding Ninjas
+- 🌟 Recognized at events like **Devfest 2024 at Gwalior** and **Hackhound 2.0 at SRM University**
+- 👏 Certifications from Microsoft, GitHub, HackerRank, and more
 
-## 💡 Current Interests
+## 🤝 Let's Connect!
 
-- 🚀 Working on **Full Stack Development** and **Web 3.0 Technologies**.
-- 🎓 Mentoring aspiring developers through open source contributions.
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-blue?logo=linkedin&logoColor=white&style=for-the-badge)](https://www.linkedin.com/in/rishab-chauhan-149b65218/) [![Twitter](https://img.shields.io/badge/Twitter-1DA1F2?logo=twitter&logoColor=white&style=for-the-badge)](https://x.com/techchauhan_) [![Portfolio](https://img.shields.io/badge/Portfolio-000000?logo=vercel&logoColor=white&style=for-the-badge)](https://techchauhan.vercel.app/)
 
 ---
 
-Thanks for stopping by! Feel free to explore my repositories, and don't hesitate to reach out if you'd like to collaborate!
+Thanks for visiting my profile! I’m always open to collaborate on interesting projects or discuss tech trends. Feel free to explore my repositories and reach out!
 
-![visitors](https://visitor-badge.glitch.me/badge?page_id=yourusername.yourusername)
+![Visitors](https://visitor-badge.glitch.me/badge?page_id=techchauhan)
