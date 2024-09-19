@@ -15,7 +15,7 @@ const Introduction: React.FC = () => (
       transition={{ duration: 6, repeat: Infinity, repeatType: 'reverse' }}
     />
     
-    <Avatar />
+    <Avatar   />
 
     <motion.h1
       initial={{ opacity: 0, y: 50 }}
@@ -46,7 +46,7 @@ const Introduction: React.FC = () => (
       transition={{ duration: 0.8, delay: 0.4 }}
     >
       <a
-        href="https://linkedin.com/in/yourprofile"
+        href="https://www.linkedin.com/in/rishab-chauhan-149b65218/"
         target="_blank"
         rel="noopener noreferrer"
         className="text-blue-600 hover:text-blue-800 hover:underline transition-transform transform hover:scale-105"
@@ -54,7 +54,7 @@ const Introduction: React.FC = () => (
         LinkedIn
       </a>
       <a
-        href="https://twitter.com/yourprofile"
+        href="https://x.com/techchauhan_"
         target="_blank"
         rel="noopener noreferrer"
         className="text-blue-400 hover:text-blue-600 hover:underline transition-transform transform hover:scale-105"
@@ -62,7 +62,7 @@ const Introduction: React.FC = () => (
         Twitter
       </a>
       <a
-        href="https://reddit.com/user/yourprofile"
+        href="https://www.reddit.com/user/Chauhan___/"
         target="_blank"
         rel="noopener noreferrer"
         className="text-orange-600 hover:text-orange-800 hover:underline transition-transform transform hover:scale-105"
@@ -70,7 +70,7 @@ const Introduction: React.FC = () => (
         Reddit
       </a>
       <a
-        href="https://github.com/yourprofile"
+        href="https://github.com/Techchauhan"
         target="_blank"
         rel="noopener noreferrer"
         className="text-white hover:text-gray-700 hover:underline transition-transform transform hover:scale-105"
