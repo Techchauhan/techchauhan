@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { collection, getDocs, Timestamp } from 'firebase/firestore';
 import { db } from '@/Firebase/firebaseConfig';
+import { Spin } from 'antd';
 
 type Blog = {
   id: string;
@@ -70,7 +71,9 @@ export default function Blogs() {
       </div>
 
       {filteredPosts.length === 0 && (
-        <p className="text-center text-gray-500 mt-4">No posts found.</p>
+         <div className="flex justify-center items-center mt-4">
+         <Spin />
+       </div>
       )}
     </div>
   );
