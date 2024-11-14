@@ -77,6 +77,13 @@ const Introduction: React.FC = () => (
       >
         GitHub
       </a>
+      <a
+        href="/blog"
+        rel="noopener noreferrer"
+        className="text-yellow-400 hover:text-gray-700 hover:underline transition-transform transform hover:scale-105"
+      >
+        Blog
+      </a>
     </motion.div>
   </section>
 );
