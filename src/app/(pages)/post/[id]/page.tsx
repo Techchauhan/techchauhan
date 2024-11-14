@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { format } from 'date-fns';
+import { Skeleton } from 'antd';
 
 interface Post {
   id: string;
@@ -77,7 +78,7 @@ const ViewPost: React.FC = () => {
   }, [postId, router]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div><Skeleton active />;</div>;
   }
 
   if (!post) {
@@ -221,6 +222,9 @@ const ViewPost: React.FC = () => {
           ))}
         </div>
       </div>
+
+
+
     </div>
   );
 };
