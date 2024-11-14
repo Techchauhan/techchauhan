@@ -55,7 +55,7 @@ const Projects: React.FC = () => {
       text='Project Completed'
       duration={0.7} // Adjust the duration of each letter's animation
       delayMultiple={0.05} // Adjust the delay between each character
-      className="text-purple-500 text-3xl font-bold " //
+      className="text-purple-500 text-2xl font-bold " //
       />
 
       {/* Flexbox Layout: Left Column for Projects, Right Column for IconCloud */}

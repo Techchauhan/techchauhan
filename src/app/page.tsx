@@ -39,8 +39,7 @@ const Home: React.FC = () => {
       <Introduction />
       <FieldsOfInterest />
       <Projects />
-      <Meteors />
-     
+      {/* <Meteors /> */}
       <RecentPosts />
       <Footer />
     </div>
