@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import HyperText from './magicui/hyper-text';
 import dynamic from 'next/dynamic';
 
+
 const SparklesText = dynamic(() => import('./magicui/sparkles-text'), { ssr: false });
 const Introduction: React.FC = () => (
   <section className="relative text-center py-12 bg-gradient-to-r overflow-hidden">
@@ -26,8 +27,8 @@ const Introduction: React.FC = () => (
       Hi, I&apos;m {" "}
       <HyperText
         className="text-4xl font-bold text-white dark:text-white cursor-pointer"
-        text=" Rishab Chauhan"
-      />
+        text=" Rishab"
+      /> 👋🏻
     </motion.h1>
 
     <motion.p
