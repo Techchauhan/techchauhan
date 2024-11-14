@@ -12,7 +12,7 @@ const config: Config = {
   prefix: '',
   theme: {
     container: {
-      center: true, // Fix: Set to true, not 'true'
+      center: true, // Corrected to boolean
       padding: '2rem',
       screens: {
         '2xl': '1400px',
