@@ -5,6 +5,7 @@ import { collection, query, getDocs, setDoc, doc } from 'firebase/firestore';
 import { handleImageUpload } from './ImageUpload';
 import { toast } from 'react-toastify';
 import dynamic from 'next/dynamic';
+import { Affix, Button } from 'antd';
 
 const PostForm = dynamic(() => import('./PostForm'), { ssr: false });
 const QuillEditor = dynamic(() => import('./QuillEditor'), { ssr: false });
@@ -27,7 +28,9 @@ const AddPost = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [categoryOptions, setCategoryOptions] = useState<{ [key: string]: string[] }>({});
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-
+  const [top, setTop] = React.useState<number>(100);
+  const [bottom, setBottom] = React.useState<number>(100);
+  
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -139,6 +142,13 @@ const AddPost = () => {
       />
 
       <QuillEditor content={content} onChange={setContent} />
+
+
+      <Affix offsetTop={top}>
+        <Button type="primary" onClick={() => setTop(top + 10)}>
+          Affix top
+        </Button>
+      </Affix>
 
       <button
         onClick={handleSubmit}
