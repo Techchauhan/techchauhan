@@ -18,7 +18,7 @@ const ReviewCard = ({
   const router = useRouter();
 
   const handleClick = () => {
-    router.push(`/posts/${id}`);
+    router.push(`/post/${id}`);
   };
 
   return (
