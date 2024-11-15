@@ -1,5 +1,4 @@
-'use client';
-
+'use client'
 import React, { useState } from 'react';
 import { Tabs, Tab } from '@nextui-org/react';
 import { NextIcon } from './Icons/NextIcons'; // Custom Next.js icon
