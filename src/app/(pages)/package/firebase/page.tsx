@@ -55,6 +55,7 @@ const FirebaseCompleteLearning = (props: Props) => {
           onSelectionChange={(key) => setActiveTab(key.toString())} // Correctly updates the activeTab state
           className="w-80 bg-white rounded-lg shadow-md"
         >
+            
           <Tab
             key="nextjs"
             title={
@@ -66,6 +67,7 @@ const FirebaseCompleteLearning = (props: Props) => {
               </div>
             }
           />
+
           <Tab
             key="flutter"
             title={
@@ -77,6 +79,7 @@ const FirebaseCompleteLearning = (props: Props) => {
               </div>
             }
           />
+
         </Tabs>
       </div>
       <div className="mt-10 z-10">{renderTabContent()}</div>
