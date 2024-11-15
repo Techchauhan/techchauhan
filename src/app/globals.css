@@ -59,6 +59,13 @@
   }
 }
 
+.css-nv59yw-MuiPaper-root-MuiCard-root {
+ background-color: transparent
+}
+.css-t0qlsi{
+  background-color: transparent
+}
+
 @layer base {
   * {
     @apply border-border;
