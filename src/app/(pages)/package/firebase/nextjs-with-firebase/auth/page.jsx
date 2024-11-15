@@ -1,5 +1,4 @@
 import React from 'react';
-import { Button } from '@nextui-org/react';
 import { FiClipboard } from 'react-icons/fi'; // Clipboard icon from react-icons
 
 const copyToClipboard = (code) => {

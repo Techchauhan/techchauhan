@@ -1,4 +1,3 @@
-'use client'
 import React, { useState } from "react";
 import { Box, Tabs, Tab, Card, CardContent } from "@mui/material";
 import NextJsAuthentication from './auth/page';  // Importing the NextJsAuthentication component

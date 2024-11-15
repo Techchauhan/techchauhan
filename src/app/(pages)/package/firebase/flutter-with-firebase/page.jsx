@@ -1,4 +1,3 @@
-'use client'
 import React, { useState } from "react";
 import { Tabs, Tab, Card, CardBody } from "@nextui-org/react";
 
