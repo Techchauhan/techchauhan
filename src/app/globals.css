@@ -74,3 +74,21 @@
     @apply bg-background text-foreground;
   }
 }
+
+div::-webkit-scrollbar {
+  width: 8px;
+}
+
+div::-webkit-scrollbar-thumb {
+  background-color: #6832a8;
+  border-radius: 10px;
+}
+
+div::-webkit-scrollbar-thumb:hover {
+  background-color: #502185; /* Darker shade on hover */
+}
+
+div::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+  border-radius: 10px;
+}
