@@ -1,4 +1,6 @@
-import React from "react";
+'use client';  
+
+import React, { useState } from "react";
 import { Box, Tabs, Tab, Card, CardContent } from "@mui/material";
 import NextJsAuthentication from './auth/page';  // Importing the NextJsAuthentication component
 import NextjsFirestore from './Firestrore/page';
@@ -7,7 +9,7 @@ export default function NextJsWithFirebase() {
   const [selectedKey, setSelectedKey] = useState("Authentication");
 
   return (
-    <div className="flex h-screen"> {/* Full-screen container */}
+    <div className="flex h-screen"> 
       <Box
         sx={{
           width: 250, // Fixed width for the tab container
@@ -33,7 +35,6 @@ export default function NextJsWithFirebase() {
             marginTop: 2, // Add some margin from the top
           }}
         >
-          {/* Authentication Tab */}
           <Tab
             label="Authentication"
             value="Authentication"
@@ -51,7 +52,6 @@ export default function NextJsWithFirebase() {
             }}
           />
 
-          {/* Firestore Tab */}
           <Tab
             label="Firestore"
             value="Firestore"
@@ -69,7 +69,6 @@ export default function NextJsWithFirebase() {
             }}
           />
 
-          {/* Videos Tab */}
           <Tab
             label="Videos"
             value="videos"
@@ -89,7 +88,6 @@ export default function NextJsWithFirebase() {
         </Tabs>
       </Box>
 
-      {/* Content Area */}
       <Box
         sx={{
           flex: 1, // Allow this box to take the remaining space
