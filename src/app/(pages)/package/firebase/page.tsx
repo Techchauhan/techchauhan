@@ -7,7 +7,8 @@ import { FlutterIcon } from './Icons/FlutterIcon'; // Custom Flutter icon
 import Particles from '@/components/ui/particles'; // Magic UI Particles component
 import Meteors from '@/components/ui/meteors'; // Magic UI Meteors component
 import NextJsWithFirebase from './nextjs-with-firebase/page';
-import FlutterWithFirebase from './nextjs-with-firebase/page'
+import FlutterWithFirebase from './flutter-with-firebase/page'; // Corrected path
+
 type Props = {};
 
 const FirebaseCompleteLearning = (props: Props) => {
@@ -17,7 +18,7 @@ const FirebaseCompleteLearning = (props: Props) => {
     switch (activeTab) {
       case 'nextjs':
         return (
-            <div className="relative p-6 bg-gradient-to-r from-purple-500/70 via-purple-400/50 to-indigo-600/70 text-white rounded-lg shadow-lg">
+          <div className="relative p-6 bg-gradient-to-r from-purple-500/70 via-purple-400/50 to-indigo-600/70 text-white rounded-lg shadow-lg">
             <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-black/30 rounded-lg pointer-events-none"></div>
             <div className="relative z-10">
               <h2 className="text-2xl font-semibold">Next.js & Firebase</h2>
@@ -27,14 +28,13 @@ const FirebaseCompleteLearning = (props: Props) => {
         );
       case 'flutter':
         return (
-            <div className="relative  p-6 bg-gradient-to-r from-blue-400/70 to-cyan-500/70 text-white rounded-lg shadow-lg">
+          <div className="relative p-6 bg-gradient-to-r from-blue-400/70 to-cyan-500/70 text-white rounded-lg shadow-lg">
             <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-black/30 rounded-lg pointer-events-none"></div>
             <div className="relative z-10">
               <h2 className="text-2xl font-semibold">Flutter & Firebase</h2>
-              <FlutterWithFirebase></FlutterWithFirebase>
+              <FlutterWithFirebase />
             </div>
           </div>
-          
         );
       default:
         return <div className="text-center">Select a tab to view its content.</div>;
@@ -52,8 +52,8 @@ const FirebaseCompleteLearning = (props: Props) => {
           aria-label="Firebase Learning Tabs"
           color="primary"
           variant="bordered"
-          selectedKey={activeTab}
-          onSelectionChange={(key) => setActiveTab(key as string)}
+          selectedKey={activeTab} // Properly controls the active tab
+          onSelectionChange={(key) => setActiveTab(key.toString())} // Correctly updates the activeTab state
           className="w-80 bg-white rounded-lg shadow-md"
         >
           <Tab
@@ -64,7 +64,6 @@ const FirebaseCompleteLearning = (props: Props) => {
                 <span className="font-medium text-gray-800 hover:text-indigo-600 transition-colors">
                   Next.js
                 </span>
-
               </div>
             }
           />
