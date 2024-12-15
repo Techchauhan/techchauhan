@@ -4,10 +4,10 @@
 - **keeping Secret 🤫**
 
 ### 👨‍💻 All Projects  
-- Available at: [techchauhan.in](https://techchauhan.in)
+- Available at: [techchauhan.vercel.app](https://techchauhan.vercel.app)
 
 ### 📝 Blog  
-- Regularly writing articles at: [techchauhan.in/course](https://techchauhan.in/course)
+- Regularly writing articles at: [techchauhan.vercel.app/blog]([https://techchauhan.vercel.app/posts](https://techchauhan.vercel.app/blog))
 
 ### 💬 Expertise  
 - **Android Development**  
