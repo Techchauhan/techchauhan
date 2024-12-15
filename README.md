@@ -1,7 +1,7 @@
 # 👋 Welcome to My Profile!
 
 ### 🔭 Currently Working On  
-- **Collage Application**
+- **keeping Secret 🤫**
 
 ### 👨‍💻 All Projects  
 - Available at: [techchauhan.in](https://techchauhan.in)
@@ -43,7 +43,11 @@
 
 ## 📈 GitHub Stats
 
-![Rishab's GitHub stats](https://github-readme-stats.vercel.app/api?username=techchauhan&show_icons=true&theme=radical)
+<p>
+  <img align="left" src="https://github-readme-stats.vercel.app/api/top-langs?username=techchauhan&show_icons=true&locale=en&layout=compact" alt="techchauhan's Top Languages" />
+</p>
+<p>&nbsp;<img align="center" src="https://github-readme-stats.vercel.app/api?username=techchauhan&show_icons=true&locale=en" alt="techchauhan's GitHub Stats" /></p>
+<p><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=techchauhan&" alt="techchauhan's GitHub Streak Stats" /></p>
 
 ## 🏆 Achievements
 
