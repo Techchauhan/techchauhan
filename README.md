@@ -43,11 +43,23 @@
 
 ## 📈 GitHub Stats
 
+## 📊 GitHub Stats  
+
+### 🔝 Top Languages  
 <p>
-  <img align="left" src="https://github-readme-stats.vercel.app/api/top-langs?username=techchauhan&show_icons=true&locale=en&layout=compact" alt="techchauhan's Top Languages" />
+  <img align="center" src="https://github-readme-stats.vercel.app/api/top-langs?username=techchauhan&show_icons=true&locale=en&layout=compact&theme=radical" alt="techchauhan's Top Languages" />
 </p>
-<p>&nbsp;<img align="center" src="https://github-readme-stats.vercel.app/api?username=techchauhan&show_icons=true&locale=en" alt="techchauhan's GitHub Stats" /></p>
-<p><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=techchauhan&" alt="techchauhan's GitHub Streak Stats" /></p>
+
+### 🚀 Profile Stats  
+<p>
+  <img align="center" src="https://github-readme-stats.vercel.app/api?username=techchauhan&show_icons=true&locale=en&theme=radical" alt="techchauhan's GitHub Stats" />
+</p>
+
+### 🔥 Streak Stats  
+<p>
+  <img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=techchauhan&theme=radical" alt="techchauhan's GitHub Streak Stats" />
+</p>
+
 
 ## 🏆 Achievements
 
